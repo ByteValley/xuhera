@@ -30,11 +30,11 @@
 <h2>2. 数据会发送到哪里（均由你主动开启）</h2>
 <ul>
   <li><strong>AI 分析：</strong>本应用优先使用设备上的本机模型，数据不离开设备。只有在你确认后，才会把当次分析所需的内容（例如摘要中的睡眠明细、症状、医生方案、处方和备注，身体数据，或饮食照片）发送给你选择的服务：OpenAI（通过你登录的 ChatGPT 账号计划）或你自己配置的备用 API。这些服务按其各自的隐私政策处理数据。</li>
-  <li><strong>iCloud 同步：</strong>只同步应用设置（例如语言、外观、时间格式、头像和昵称），保存在你自己的 iCloud 私有数据库中。复诊记录、摘要和身体数据等健康相关信息不会存入 iCloud。</li>
-  <li><strong>Google Drive 同步：</strong>数据先在本机用你设置的同步密码加密，再上传到你 Google Drive 的“应用专属隐藏空间”（appDataFolder）。本应用看不到你 Google Drive 中的其他文件。</li>
-  <li><strong>PikPak WebDAV 同步：</strong>数据同样先在本机加密，再上传到你填写的 WebDAV 地址。</li>
+  <li><strong>iCloud 同步：</strong>复诊记录、摘要、身体数据和应用设置在上传前先在本机端到端加密，再保存到你自己的 iCloud 私有数据库。加密密钥自动保存在你的 iCloud 钥匙串中（同样是端到端加密），只有你登录同一 Apple ID 的设备能取得；iCloud 中只保存加密后的内容，Apple、本应用开发者和其他任何人都无法读取。</li>
+  <li><strong>Google Drive 同步：</strong>数据先在本机端到端加密，再上传到你 Google Drive 的“应用专属隐藏空间”（appDataFolder）。本应用看不到你 Google Drive 中的其他文件。</li>
+  <li><strong>PikPak WebDAV 同步：</strong>数据同样先在本机端到端加密，再上传到你填写的 WebDAV 地址。</li>
 </ul>
-<p>同步密码、Google 和 PikPak 的登录凭据保存在本机的钥匙串中，不会上传。</p>
+<p>所有同步方式使用同一把加密密钥：它由本应用随机生成，只保存在你的 iCloud 钥匙串中（端到端加密），仅你登录同一 Apple ID 的设备可以取得，不会上传到任何云盘。Google 和 PikPak 的登录凭据保存在本机钥匙串中，不会上传。</p>
 
 <h2>3. Google 用户数据</h2>
 <p>你用 Google 账号登录时，本应用只申请以下权限：</p>
@@ -78,11 +78,11 @@
   <h3>Where data goes (only when you turn it on)</h3>
   <ul>
     <li><strong>AI analysis:</strong> on-device first. Only after you confirm does the app send the content needed for that analysis to the service you chose: OpenAI (through your ChatGPT plan) or a backup API you configured. Those services handle data under their own policies.</li>
-    <li><strong>iCloud sync:</strong> app settings only (such as language, appearance, time format, photo, and nickname), stored in your private iCloud database. Health-related information such as visit notes, summaries, and body data is never stored in iCloud.</li>
-    <li><strong>Google Drive sync:</strong> encrypted on your device with your sync passphrase, then stored in the hidden app data folder of your Google Drive. The app cannot see your other Drive files.</li>
-    <li><strong>PikPak WebDAV sync:</strong> encrypted on your device, then uploaded to the WebDAV address you enter.</li>
+    <li><strong>iCloud sync:</strong> visit notes, summaries, body data, and app settings are end-to-end encrypted on your device before they are stored in your private iCloud database. The encryption key is kept automatically in your iCloud Keychain (itself end-to-end encrypted) and is available only to your devices signed in to the same Apple ID. iCloud holds only ciphertext that Apple, the developer, and anyone else cannot read.</li>
+    <li><strong>Google Drive sync:</strong> end-to-end encrypted on your device, then stored in the hidden app data folder of your Google Drive. The app cannot see your other Drive files.</li>
+    <li><strong>PikPak WebDAV sync:</strong> end-to-end encrypted on your device, then uploaded to the WebDAV address you enter.</li>
   </ul>
-  <p>Your sync passphrase and Google and PikPak credentials are kept in this device's Keychain and are never uploaded.</p>
+  <p>All sync methods use one encryption key, generated randomly by the app and kept only in your iCloud Keychain (end-to-end encrypted), available to your devices signed in to the same Apple ID and never uploaded to any cloud drive. Google and PikPak credentials stay in this device's Keychain and are never uploaded.</p>
 
   <h3>Google user data</h3>
   <p>When you sign in with Google, the app requests only <code>openid</code> and <code>email</code> (to show which account is signed in) and <code>https://www.googleapis.com/auth/drive.appdata</code> (to store the app's encrypted sync file in your Drive's app data folder). This data is used only to provide sync. It is not used for advertising, not sold, not transferred to others, not used to train AI models, and not read by humans unless you ask.</p>
